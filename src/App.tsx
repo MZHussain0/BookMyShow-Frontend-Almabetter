@@ -25,6 +25,7 @@ function App() {
     (value) => value === 0
   );
 
+  // Define the mutation function for booking tickets
   const { mutate: bookTickets } = useMutation({
     mutationFn: async () => {
       if (!bookingDetails.movie) {
@@ -35,21 +36,27 @@ function App() {
         setError("Please select a time slot before proceeding.");
         return Promise.reject("Please select a time before proceeding.");
       }
+      // Check if at least one seat is selected
       if (allSeatsAreZero) {
         setError("Select atleast one seat in any row to book tickets.");
         return Promise.reject("Please select a seat.");
       }
+      // If all checks pass, call the createBooking function
       return createBooking(bookingDetails);
     },
     onSuccess: (data) => {
+      // Show a success toast message
       toast({
         variant: "default",
         title: "Tickets Booked Successfully!",
       });
+      // Set the last booking details
       setLastBookingDetails(data);
+
+      // Reset the booking details in the store
       useStore.getState().resetBookingDetails();
-      // window.location.reload();
     },
+    // Show an error toast message
     onError: () =>
       toast({
         variant: "destructive",
@@ -58,6 +65,7 @@ function App() {
       }),
   });
 
+  //
   const clearError = () => {
     setError("");
   };
@@ -67,7 +75,7 @@ function App() {
       <Navbar />
 
       {/* Main section */}
-      <div className="min-h-screen flex items-start justify-center flex-wrap gap-y-4 pt-20 gap-x-4 px-4">
+      <div className="min-h-screen flex items-start justify-center pt-20 gap-x-4 px-4">
         <div className="bg-gradient-to-r from-emerald-500 to-emerald-900 rounded-xl border border-teal-300 drop-shadow-md shadow-teal-200 ">
           <div className="px-8 py-16 text-white">
             <MovieSelectionSection movies={data.movies} />

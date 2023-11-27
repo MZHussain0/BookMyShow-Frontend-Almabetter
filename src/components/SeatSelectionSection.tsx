@@ -46,7 +46,7 @@ const SeatSelectionSection = ({ seats }: SeatProps) => {
               <Card
                 key={seat}
                 className={cn(
-                  "text-xl font-semibold py-4 px-4 bg-slate-400",
+                  "text-xl font-semibold py-4 px-4 bg-slate-400 w-[150px]",
                   booking.seats[seat] > 0 &&
                     "bg-gradient-to-r from-rose-500 to-rose-900"
                 )}>
