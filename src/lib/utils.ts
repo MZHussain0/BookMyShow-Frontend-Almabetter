@@ -8,5 +8,5 @@ export function cn(...inputs: ClassValue[]) {
 
 // Create axios client with baseURL
 export const apiClient = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://bookmyshow-backend-almabetter-g515.onrender.com",
 });
